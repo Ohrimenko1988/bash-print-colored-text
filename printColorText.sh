@@ -6,17 +6,17 @@ backgroundColor=$2
 text=$3
 colorsList=( -d -r -g -y )
 
+#Defined colors for text
 DEFAULT="\e[39m"
 RED="\033[0;31m"
 GREEN="\033[32m"
 YELLOW="\033[1;33m"
 
+#Defined colors for background
 DEFAULT_BACKGROUND="\e[49m"
 RED_BACKGROUND="\e[41m"
 GREEN_BACKGROUND="\e[42m"
 YELLOW_BACKGROUND="\e[43m"
-
-
 
 help() {
 echo -e "Please enter one of the next arguments: \n
@@ -26,39 +26,28 @@ echo -e "Please enter one of the next arguments: \n
          \t-y \tPrints text or background in yellow color\n"
 }
 
-
-
 checkArgumentsCount() {
 if [[ $countOfArguments -ne $correctCountOfArguments ]]; then
-        echo "Wrong arguments count. Should be $correctCountOfArguments arguments, but current count is $countOfArguments"
-        exit
-    else
-        echo "Arguments count is right"
-    fi
+    echo "Wrong arguments count. Should be $correctCountOfArguments arguments, but current count is $countOfArguments"
+    exit
+fi
 }
 
-
-isTextColorArgumentValid() {
-if [[ " ${colorsList[@]} " =~ " ${textColor} " ]]; then
-    echo "Text color argument is right"
-else
+checkTextColorArgument() {
+if [[ ! " ${colorsList[@]} " =~ " ${textColor} " ]]; then
     echo "Sorry, but text color argument is wrong"
     help
     exit
 fi
 }
 
-
-isBackgroundColorArgumentValid() {
-if [[ " ${colorsList[@]} " =~ " ${backgroundColor} " ]]; then
-    echo "Background color argument is right"
-else
+checkBackgroundColorArgument() {
+if [[ ! " ${colorsList[@]} " =~ " ${backgroundColor} " ]]; then
     echo "Sorry but background color argument is wrong"
     help
     exit
 fi
 }
-
 
 getTextColor() {
 case $textColor in
@@ -81,7 +70,6 @@ case $textColor in
 esac
 }
 
-
 getBackgroundColor() {
 case $backgroundColor in
     "-d")
@@ -103,19 +91,14 @@ case $backgroundColor in
 esac
 }
 
-
-
 print() {
 echo -e "$(getTextColor)$(getBackgroundColor)$text$DEFAULT_BACKGROUND"
 }
 
 
-
-clear
 checkArgumentsCount
-isTextColorArgumentValid
-isBackgroundColorArgumentValid
-#defineTextColor
+checkTextColorArgument
+checkBackgroundColorArgument
 print
 
 
