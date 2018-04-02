@@ -28,7 +28,9 @@ echo -e "Please enter one of the next arguments: \n
 
 checkArgumentsCount() {
 if [[ $countOfArguments -ne $correctCountOfArguments ]]; then
-    echo "Wrong arguments count. Should be $correctCountOfArguments arguments, but current count is $countOfArguments"
+    echo "Wrong arguments count. Should be $correctCountOfArguments arguments, but current count is $countOfArguments ."
+    echo "Pattern: printColorText.sh <textColorArgument> <backgroundColorArgument> <text>"
+    help
     exit
 fi
 }
