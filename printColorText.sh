@@ -92,7 +92,7 @@ esac
 }
 
 print() {
-echo -e "$(getTextColor)$(getBackgroundColor)$text$DEFAULT_BACKGROUND"
+echo -e "$(getTextColor)$(getBackgroundColor)$text$DEFAULT$DEFAULT_BACKGROUND"
 }
 
 
